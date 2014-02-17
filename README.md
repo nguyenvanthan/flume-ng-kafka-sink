@@ -10,9 +10,9 @@ This project is used for [flume-ng](https://github.com/apache/flume) to communic
     agent_log.sinks.kafka.channel = all_channel
     agent_log.sinks.kafka.zk.connect = 127.0.0.1:2181
     agent_log.sinks.kafka.topic = all
-    agent_log.sinks.kafka.batchsize = 200
+    agent_log.sinks.kafka.batch.num.messages = 200
     agent_log.sinks.kafka.producer.type = async
-    agent_log.sinks.kafka.serializer.class = kafka.serializer.StringEncoder
+    agent_log.sinks.kafka.serializer.class = kafka.serializer.DefaultEncoder
     agent_log.sinks.kafka.request.required.acks = 1
 
 _Supported properties defined by_: [kafka producer configs](https://kafka.apache.org/documentation.html#producerconfigs)
