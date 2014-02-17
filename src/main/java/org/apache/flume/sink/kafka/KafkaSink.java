@@ -30,9 +30,9 @@ import org.slf4j.LoggerFactory;
  * company production environment which can hit 100k messages per second.
  * <tt>zk.connect: </tt> the zookeeper ip kafka use.<p>
  * <tt>topic: </tt> the topic to read from kafka.<p>
- * <tt>batchSize: </tt> send serveral messages in one request to kafka. <p>
+ * <tt>batch.num.messages: </tt> send serveral messages in one request to kafka when using async mode.<p>
  * <tt>producer.type: </tt> type of producer of kafka, async or sync is available.<o>
- * <tt>serializer.class: </tt>{@kafka.serializer.StringEncoder}
+ * <tt>serializer.class: </tt>{@kafka.serializer.DefaultEncoder}
  */
 public class KafkaSink extends AbstractSink implements Configurable{
 	private static final Logger log = LoggerFactory.getLogger(KafkaSink.class);
@@ -50,7 +50,9 @@ public class KafkaSink extends AbstractSink implements Configurable{
 				return Status.BACKOFF;
 			}
 			producer.send(new KeyedMessage<String, String>(topic, new String(e.getBody())));
-			log.trace("Message: {}", e.getBody());
+            if (log.isDebugEnabled()) {
+			    log.debug("Message: {}", e.getBody());
+            }
 			tx.commit();
 			return Status.READY;
 		} catch(Exception e) {
