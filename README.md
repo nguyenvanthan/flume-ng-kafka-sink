@@ -45,6 +45,12 @@ And restart your flume agent
     sudo sudo /etc/init.d/flume-ng-agent restart
 
 
+## Need a Docker image for Kafka ?
+
+You can have a look here : [Kafka Docker Image](https://github.com/nguyenvanthan/docker-images/tree/master/kafka)
+:-)
+
+
 ## Special Thanks
 
 _From original developer:_
